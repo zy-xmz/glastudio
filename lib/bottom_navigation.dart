@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
-import 'pages/painting.dart';
+import 'pages/personal.dart';
+import 'pages/address_book.dart';
+import 'pages/discovery.dart';
+import 'pages/chat.dart';
 
 // 创建一个有状态的底部导航栏组件
 class BottomNavigation extends StatefulWidget {
@@ -11,7 +13,12 @@ class BottomNavigation extends StatefulWidget {
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  final list = [const HomePage(), const Mizhou()];
+  final list = [
+    const Chat(),
+    const AddressBook(),
+    const Discovery(),
+    const Personal()
+  ];
   int actIndex = 0;
 
   @override
@@ -27,8 +34,11 @@ class _BottomNavigationState extends State<BottomNavigation> {
           },
           type: BottomNavigationBarType.fixed,
           items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: '首页'),
-            BottomNavigationBarItem(icon: Icon(Icons.icecream), label: '画')
+            BottomNavigationBarItem(icon: Icon(Icons.textsms), label: '聊天'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_box), label: '通讯录'),
+            BottomNavigationBarItem(icon: Icon(Icons.camera), label: '发现'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: '我'),
           ]),
     );
   }
