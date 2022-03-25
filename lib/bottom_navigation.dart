@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/personal.dart';
-import 'pages/address_book.dart';
+import 'pages/contact_book.dart';
 import 'pages/discovery.dart';
 import 'pages/chat.dart';
 
@@ -15,7 +15,7 @@ class BottomNavigation extends StatefulWidget {
 class _BottomNavigationState extends State<BottomNavigation> {
   final list = [
     const Chat(),
-    const AddressBook(),
+    const ContactBook(),
     const Discovery(),
     const Personal()
   ];
