@@ -11,10 +11,41 @@ class Chat extends StatelessWidget {
       appBar: CustomBar(
         title: '聊天',
         actions: [
-          IconButton(
-            onPressed: () => {},
+          // 定义一个点击显示菜单的按钮
+          PopupMenuButton(
             icon: const Icon(Icons.add_circle_outline,
-                color: Color(0xFF323232)))
+                color: Color(0xFF323232)),
+            color: const Color(0x99000000),
+            // offset控制菜单弹窗的位置
+            offset: const Offset(0, 50),
+            // RoundedRectangleBorder 圆角矩形
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6)
+            ),
+            // 创建菜单
+            itemBuilder: (context) => [
+              // 菜单项
+              PopupMenuItem(child: Row(children: [
+                Container(child: const Icon(Icons.wechat), margin: const EdgeInsets.only(right: 10)),
+                const Text('发起群聊', style: TextStyle(color: Colors.white))
+              ])),
+              // 菜单项
+              PopupMenuItem(child: Row(children: [
+                Container(child: const Icon(Icons.person_add_alt_1), margin: const EdgeInsets.only(right: 10)),
+                const Text('添加朋友', style: TextStyle(color: Colors.white))
+              ])),
+              // 菜单项
+              PopupMenuItem(child: Row(children: [
+                Container(child: const Icon(Icons.qr_code_scanner), margin: const EdgeInsets.only(right: 10)),
+                const Text('扫一扫', style: TextStyle(color: Colors.white))
+              ])),
+              // 菜单项
+              PopupMenuItem(child: Row(children: [
+                Container(child: const Icon(Icons.credit_score), margin: const EdgeInsets.only(right: 10)),
+                const Text('收付款', style: TextStyle(color: Colors.white))
+              ])),
+            ],
+          )
         ]),
         body: Column(children: [
           const SearchBarBtn(),
