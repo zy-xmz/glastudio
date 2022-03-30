@@ -58,7 +58,7 @@ class Chat extends StatelessWidget {
                 const Text('收付款', style: TextStyle(color: Colors.white))
               ])),
             ],
-          )
+          ),
         ]),
         // 滚动组件
         body: CustomScrollView(
