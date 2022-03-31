@@ -102,58 +102,65 @@ class Chat extends StatelessWidget {
                     // 行内容
                     child: Column(children: [
                       // 单行内容
-                      Container(
-                        color: Colors.white, // 单行背景色设置为白色
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 16), // 设置行内水平和垂直方向上的边距
-                        child: Row(children: [
-                          // 左边头像
-                          Container(
-                            margin: const EdgeInsets.only(
-                                right: 10), // 设置头像到右边内容的距离
-                            child: ClipRRect(
-                                child: Image.asset('lib/assets/img/head.jpg',
-                                    width: 50, height: 50), // 设置头像
-                                borderRadius: BorderRadius.circular(4) // 设置头像圆角
-                                ),
-                          ),
-                          // 右边内容
-                          Expanded(
-                            child: Column(children: [
-                              Row(children: const [
-                                Expanded(
-                                    child: Text('小白',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: Color(0xFF323232),
-                                            fontWeight: FontWeight.bold),
-                                        overflow: TextOverflow
-                                            .ellipsis)), // 设置主标题，自动占满剩余空间
-                                Text(
-                                  '昨天18:33',
-                                  style: TextStyle(
-                                      fontSize: 12, color: Color(0xFFcccccc)),
-                                ) // 设置右边的时间
-                              ]),
-                              Container(
-                                margin: const EdgeInsets.only(top: 5),
-                                child: Row(children: const [
-                                  Expanded(
-                                    child: Text('小胖米粥，今天晚上吃什么？吃元宵咋样？我要飞的更高',
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color(0xFF969696)),
-                                        overflow:
-                                            TextOverflow.ellipsis // 设置文本溢出的处理方式
-                                        ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(context, '/chart_detail',
+                              arguments: {'name': '小白胖'});
+                        },
+                        child: Container(
+                          color: Colors.white, // 单行背景色设置为白色
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 16), // 设置行内水平和垂直方向上的边距
+                          child: Row(children: [
+                            // 左边头像
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  right: 10), // 设置头像到右边内容的距离
+                              child: ClipRRect(
+                                  child: Image.asset('lib/assets/img/head.jpg',
+                                      width: 50, height: 50), // 设置头像
+                                  borderRadius:
+                                      BorderRadius.circular(4) // 设置头像圆角
                                   ),
-                                  Icon(Icons.notifications_off_outlined,
-                                      color: Color(0xFFcccccc), size: 18)
+                            ),
+                            // 右边内容
+                            Expanded(
+                              child: Column(children: [
+                                Row(children: const [
+                                  Expanded(
+                                      child: Text('小白',
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Color(0xFF323232),
+                                              fontWeight: FontWeight.bold),
+                                          overflow: TextOverflow
+                                              .ellipsis)), // 设置主标题，自动占满剩余空间
+                                  Text(
+                                    '昨天18:33',
+                                    style: TextStyle(
+                                        fontSize: 12, color: Color(0xFFcccccc)),
+                                  ) // 设置右边的时间
                                 ]),
-                              )
-                            ]),
-                          ),
-                        ]),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 5),
+                                  child: Row(children: const [
+                                    Expanded(
+                                      child: Text('小胖米粥，今天晚上吃什么？吃元宵咋样？我要飞的更高',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF969696)),
+                                          overflow: TextOverflow
+                                              .ellipsis // 设置文本溢出的处理方式
+                                          ),
+                                    ),
+                                    Icon(Icons.notifications_off_outlined,
+                                        color: Color(0xFFcccccc), size: 18)
+                                  ]),
+                                )
+                              ]),
+                            ),
+                          ]),
+                        ),
                       ),
                       // 分割线
                       const Divider(

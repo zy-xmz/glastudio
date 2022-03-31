@@ -13,7 +13,7 @@ class SearchBarBtn extends StatelessWidget {
                 MaterialStateProperty.all(const Size.fromHeight(40)), // 设置按钮高度
             elevation: MaterialStateProperty.all(0), // 去掉阴影效果（阴影程度为0）
             backgroundColor: MaterialStateProperty.all(Colors.white)),
-        onPressed: () => {},
+        onPressed: () => {Navigator.pushNamed(context, '/search')},
         child:
             Row(mainAxisAlignment: MainAxisAlignment.center, children: const [
           Icon(Icons.search, color: Color(0xFFcccccc), size: 22),
