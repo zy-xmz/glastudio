@@ -67,12 +67,12 @@ class Chat extends StatelessWidget {
               const SliverToBoxAdapter(
                   // 自定义的搜索栏按钮
                   child: SearchBarBtn()),
-              // SlidableAutoCloseBehavior flutter_slidable插件提供的类；作用：同时只有一个滑动菜单
+              // SlidableAutoCloseBehavior flutter_slidable插件提供的类；作用：同时只有一个侧滑打开
               SlidableAutoCloseBehavior(
                 // 列表
                 child: SliverList(
                     // SliverChildBuilderDelegate 使用builder回调创建子组件
-                    delegate: SliverChildBuilderDelegate((content, int index) {
+                    delegate: SliverChildBuilderDelegate((context, int index) {
                   // 使用flutter_slidable侧滑插件
                   return Slidable(
                     // 右边向左滑

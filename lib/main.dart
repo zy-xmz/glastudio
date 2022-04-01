@@ -11,11 +11,16 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
-  // 配置路由表（给路由起名）
+  /*
+    作用：配置路由表（命名路由，也就是给路由起名字）
+    为什么不在MaterialApp中直接定义routes属性？
+    因为在MaterialApp的routes属性中定义的路由，不会触发onGenerateRoute函数，
+    如果想要用onGenerateRoute统一处理路由拦截，那么就不能在MaterialApp中定义routes
+  */
   final routes = {
     '/search': (context) => const Search(),
     '/chat': (context) => const Chat(),
-    '/chart_detail': (context, {arguments}) => ChartDetail(arguments: arguments)
+    '/chart_detail': (context, { arguments }) => ChartDetail(arguments: arguments), // 传参的写法
   };
 
   @override
@@ -24,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'demo',
       theme: ThemeData.light(),
       home: const BottomNavigation(),
-      // onGenerateRoute路由拦截处理（前提：MaterialApp下没有定义routes）
+      // onGenerateRoute路由拦截处理
       onGenerateRoute: (RouteSettings settings) {
         final String? name = settings.name;
         final Function? pageBuilder = routes[name];
