@@ -234,9 +234,10 @@ class _ContactBookState extends State<ContactBook> {
                 ],
               ),
               Positioned(
-                top: 0,
+                top: 50,
                 right: 5,
-                child: textBtns(),
+                height: 450,
+                child: SingleChildScrollView(child: textBtns()),
               )
             ])));
   }
