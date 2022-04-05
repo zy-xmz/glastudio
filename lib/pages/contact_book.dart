@@ -77,6 +77,54 @@ class _ContactBookState extends State<ContactBook> {
     },
   ];
 
+  Widget textBtns() {
+    // 字母列表
+    var letters = [
+      'A',
+      'B',
+      'C',
+      'D',
+      'E',
+      'F',
+      'G',
+      'H',
+      'I',
+      'J',
+      'K',
+      'L',
+      'M',
+      'N',
+      'O',
+      'P',
+      'Q',
+      'R',
+      'S',
+      'T',
+      'U',
+      'V',
+      'W',
+      'X',
+      'Y',
+      'Z'
+    ];
+    // 定义一个组件集合，接收每个letter生成的组件
+    List<Widget> widBtns = [];
+    // 最终要渲染的组件
+    Widget btnListColumn;
+    for (var i = 0; i < letters.length; i++) {
+      widBtns.add(TextButton(
+          onPressed: () {
+            // Scrollable.ensureVisible(keyA.currentContext as BuildContext);
+          },
+          child: Text(letters[i])));
+    }
+
+    btnListColumn = Column(
+      children: widBtns,
+    );
+    return btnListColumn;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,98 +134,110 @@ class _ContactBookState extends State<ContactBook> {
               icon: const Icon(Icons.person_add_alt),
               color: const Color(0xFF323232))
         ]),
-        body: CustomScrollView(
-          slivers: [
-            const SliverToBoxAdapter(child: SearchBarBtn()),
-            SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-              return Container(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    ListTile(
-                        // 左边内容
-                        leading: Container(
-                          width: 40,
-                          height: 40,
-                          child: Icon(categoryList[index]['icon'],
-                              color: Colors.white),
-                          decoration: BoxDecoration(
-                              color: categoryList[index]['color'],
-                              borderRadius: BorderRadius.circular(4.0)),
-                        ),
-                        // 中间第一行标题
-                        title: Container(
-                          alignment: Alignment.centerLeft,
-                          child: Text(categoryList[index]['label'],
-                              style: const TextStyle(color: Color(0xFF323232))),
-                        ),
-                        // 是否有选中效果
-                        selected: true,
-                        // 点击事件
-                        onTap: () => {}),
-                    // 最后一行不要生成间隔线
-                    index < categoryList.length - 1
-                        ? const Divider(
-                            indent: 70,
-                            thickness: 1,
-                            height: 10,
-                            color: Color(0xFFeeeeee))
-                        : Container()
-                  ],
-                ),
-              );
-            }, childCount: categoryList.length)),
-            SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-              // nextLiIndex 是下一项的索引；如果当前是最后一项，那么下一项就定为
-              var nextLiIndex = index < contactList.length - 1
-                  ? index + 1
-                  : contactList.length - 1;
-              return Column(children: [
-                // Offstage（中文意思：幕后） 控制组件显示或隐藏
-                Offstage(
-                    offstage: contactList[index]['hasMark'] ==
-                        false, // offstage为true，则不显示组件
-                    child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
-                        alignment: Alignment.centerLeft,
-                        child: Text(contactList[index]['mark']))),
-                Container(
-                    color: Colors.white,
-                    child: Column(
-                      children: [
-                        ListTile(
-                            // 左边内容
-                            leading: ClipRRect(
-                                borderRadius: BorderRadius.circular(4.0),
-                                child: Image.asset(contactList[index]['img'],
-                                    width: 40, height: 40)),
-                            // 中间第一行标题
-                            title: Container(
+        body: ConstrainedBox(
+            constraints: const BoxConstraints.expand(), // 使其子组件Stack占满屏幕
+            child: Stack(children: [
+              CustomScrollView(
+                slivers: [
+                  const SliverToBoxAdapter(child: SearchBarBtn()),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                    return Container(
+                      color: Colors.white,
+                      child: Column(
+                        children: [
+                          ListTile(
+                              // 左边内容
+                              leading: Container(
+                                width: 40,
+                                height: 40,
+                                child: Icon(categoryList[index]['icon'],
+                                    color: Colors.white),
+                                decoration: BoxDecoration(
+                                    color: categoryList[index]['color'],
+                                    borderRadius: BorderRadius.circular(4.0)),
+                              ),
+                              // 中间第一行标题
+                              title: Container(
+                                alignment: Alignment.centerLeft,
+                                child: Text(categoryList[index]['label'],
+                                    style: const TextStyle(
+                                        color: Color(0xFF323232))),
+                              ),
+                              // 是否有选中效果
+                              selected: true,
+                              // 点击事件
+                              onTap: () => {}),
+                          // 最后一行不要生成间隔线
+                          index < categoryList.length - 1
+                              ? const Divider(
+                                  indent: 70,
+                                  thickness: 1,
+                                  height: 10,
+                                  color: Color(0xFFeeeeee))
+                              : Container()
+                        ],
+                      ),
+                    );
+                  }, childCount: categoryList.length)),
+                  SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                    // nextLiIndex 是下一项的索引；如果当前是最后一项，那么下一项就定为
+                    var nextLiIndex = index < contactList.length - 1
+                        ? index + 1
+                        : contactList.length - 1;
+                    return Column(children: [
+                      // Offstage（中文意思：幕后） 控制组件显示或隐藏
+                      Offstage(
+                          offstage: contactList[index]['hasMark'] ==
+                              false, // offstage为true，则不显示组件
+                          child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 10),
                               alignment: Alignment.centerLeft,
-                              child: Text(contactList[index]['label'],
-                                  style: const TextStyle(
-                                      color: Color(0xFF323232))),
-                            ),
-                            // 是否有选中效果
-                            selected: true,
-                            // 点击事件
-                            onTap: () => {}),
-                        contactList[nextLiIndex]['hasMark'] == false &&
-                                index < contactList.length - 1
-                            ? const Divider(
-                                indent: 70,
-                                thickness: 1,
-                                height: 10,
-                                color: Color(0xFFeeeeee))
-                            : Container()
-                      ],
-                    ))
-              ]);
-            }, childCount: contactList.length))
-          ],
-        ));
+                              child: Text(contactList[index]['mark']))),
+                      Container(
+                          color: Colors.white,
+                          child: Column(
+                            children: [
+                              ListTile(
+                                  // 左边内容
+                                  leading: ClipRRect(
+                                      borderRadius: BorderRadius.circular(4.0),
+                                      child: Image.asset(
+                                          contactList[index]['img'],
+                                          width: 40,
+                                          height: 40)),
+                                  // 中间第一行标题
+                                  title: Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(contactList[index]['label'],
+                                        style: const TextStyle(
+                                            color: Color(0xFF323232))),
+                                  ),
+                                  // 是否有选中效果
+                                  selected: true,
+                                  // 点击事件
+                                  onTap: () => {}),
+                              contactList[nextLiIndex]['hasMark'] == false &&
+                                      index < contactList.length - 1
+                                  ? const Divider(
+                                      indent: 70,
+                                      thickness: 1,
+                                      height: 10,
+                                      color: Color(0xFFeeeeee))
+                                  : Container()
+                            ],
+                          ))
+                    ]);
+                  }, childCount: contactList.length)),
+                ],
+              ),
+              Positioned(
+                top: 0,
+                right: 5,
+                child: textBtns(),
+              )
+            ])));
   }
 }
