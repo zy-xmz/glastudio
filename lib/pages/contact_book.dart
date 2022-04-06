@@ -113,10 +113,30 @@ class _ContactBookState extends State<ContactBook> {
     Widget btnListColumn;
     for (var i = 0; i < letters.length; i++) {
       widBtns.add(TextButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(23))), // 设置按钮圆角
+            overlayColor: MaterialStateProperty.all(Colors.blue), // 设置选中时的背景色
+            foregroundColor: MaterialStateProperty.resolveWith((states) {
+              if (states.contains(MaterialState.hovered) ||
+                  states.contains(MaterialState.pressed) ||
+                  states.contains(MaterialState.focused) ||
+                  states.contains(MaterialState.selected)) {
+                return Colors.white;
+              } // 设置hovered、pressed、focused、selected四种情况下的文本颜色
+              return const Color(0xFF646464); // 设置默认文本颜色
+            }),
+            minimumSize:
+                MaterialStateProperty.all(const Size(23, 23)), // 设置按钮尺寸
+            padding: MaterialStateProperty.all(EdgeInsets.zero), // 设置边框到文字的距离
+          ),
           onPressed: () {
             // Scrollable.ensureVisible(keyA.currentContext as BuildContext);
           },
-          child: Text(letters[i])));
+          child: Text(
+            letters[i],
+            style: const TextStyle(fontSize: 10), // 设置按钮文字大小
+          )));
     }
 
     btnListColumn = Column(
