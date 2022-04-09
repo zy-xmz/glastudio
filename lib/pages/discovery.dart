@@ -7,12 +7,7 @@ class Discovery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomBar(title: '发现', actions: [
-        IconButton(
-            onPressed: () => {},
-            icon:
-                const Icon(Icons.add_circle_outline, color: Color(0xFF323232)))
-      ]),
+      appBar: const CustomBar(title: '发现'),
       body: ListView(children: [
         Container(
           color: Colors.white,
@@ -20,7 +15,12 @@ class Discovery extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(children: const [Icon(Icons.camera), Text('朋友圈')]),
+              Row(children: [
+                const Icon(Icons.camera, color: Color(0xFF59c47e)),
+                Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: const Text('朋友圈'))
+              ]),
               Row(children: [
                 ClipRRect(
                   child: Image.asset(
@@ -30,7 +30,7 @@ class Discovery extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                const Icon(Icons.chevron_right)
+                const Icon(Icons.chevron_right, color: Color(0xFFb3b3b3))
               ])
             ],
           ),
@@ -44,9 +44,12 @@ class Discovery extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: const [
-                    Icon(Icons.play_circle_outline),
-                    Text('视频号')
+                  Row(children: [
+                    const Icon(Icons.play_circle_outline,
+                        color: Color(0xFFeca150)),
+                    Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: const Text('视频号'))
                   ]),
                   Row(children: [
                     ClipRRect(
@@ -57,25 +60,32 @@ class Discovery extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    const Icon(Icons.chevron_right)
+                    Container(
+                        margin: const EdgeInsets.only(left: 5),
+                        child: const Text('赞过',
+                            style: TextStyle(
+                                color: Color(0xFF646464), fontSize: 12))),
+                    const Icon(Icons.chevron_right, color: Color(0xFFb3b3b3))
                   ])
                 ],
               ),
-              const Divider(),
+              const Divider(
+                height: 20,
+                indent: 33,
+                thickness: 1,
+                color: Color(0xFFeeeeee),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(children: const [Icon(Icons.whatshot), Text('直播')]),
                   Row(children: [
-                    ClipRRect(
-                      child: Image.asset(
-                        'lib/assets/img/head.jpg',
-                        width: 30,
-                        height: 30,
-                      ),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    const Icon(Icons.chevron_right)
+                    const Icon(Icons.whatshot, color: Color(0xFFec6b50)),
+                    Container(
+                        margin: const EdgeInsets.only(left: 10),
+                        child: const Text('直播'))
+                  ]),
+                  Row(children: const [
+                    Icon(Icons.chevron_right, color: Color(0xFFb3b3b3))
                   ])
                 ],
               ),
@@ -89,17 +99,14 @@ class Discovery extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(children: const [Icon(Icons.qr_code_scanner), Text('扫一扫')]),
               Row(children: [
-                ClipRRect(
-                  child: Image.asset(
-                    'lib/assets/img/head.jpg',
-                    width: 30,
-                    height: 30,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                const Icon(Icons.chevron_right)
+                const Icon(Icons.qr_code_scanner, color: Color(0xFF3d83e6)),
+                Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: const Text('扫一扫'))
+              ]),
+              Row(children: const [
+                Icon(Icons.chevron_right, color: Color(0xFFb3b3b3))
               ])
             ],
           ),
@@ -111,17 +118,14 @@ class Discovery extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(children: const [Icon(Icons.grid_view), Text('小程序')]),
               Row(children: [
-                ClipRRect(
-                  child: Image.asset(
-                    'lib/assets/img/head.jpg',
-                    width: 30,
-                    height: 30,
-                  ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                const Icon(Icons.chevron_right)
+                const Icon(Icons.grid_view, color: Color(0xFF6467e7)),
+                Container(
+                    margin: const EdgeInsets.only(left: 10),
+                    child: const Text('小程序'))
+              ]),
+              Row(children: const [
+                Icon(Icons.chevron_right, color: Color(0xFFb3b3b3))
               ])
             ],
           ),
