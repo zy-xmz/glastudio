@@ -131,7 +131,8 @@ class _ContactBookState extends State<ContactBook> {
             padding: MaterialStateProperty.all(EdgeInsets.zero), // 设置边框到文字的距离
           ),
           onPressed: () {
-            // Scrollable.ensureVisible(keyA.currentContext as BuildContext);
+            // var key = 'key' + letters[i];
+            // Scrollable.ensureVisible(keyB.currentContext as BuildContext);
           },
           child: Text(
             letters[i],
@@ -156,82 +157,34 @@ class _ContactBookState extends State<ContactBook> {
         ]),
         body: ConstrainedBox(
             constraints: const BoxConstraints.expand(), // 使其子组件Stack占满屏幕
-            child: Stack(children: [
-              CustomScrollView(
-                slivers: [
-                  const SliverToBoxAdapter(child: SearchBarBtn()),
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                    return Container(
-                      color: Colors.white,
-                      child: Column(
-                        children: [
-                          ListTile(
-                              // 左边内容
-                              leading: Container(
-                                width: 40,
-                                height: 40,
-                                child: Icon(categoryList[index]['icon'],
-                                    color: Colors.white),
-                                decoration: BoxDecoration(
-                                    color: categoryList[index]['color'],
-                                    borderRadius: BorderRadius.circular(4.0)),
-                              ),
-                              // 中间第一行标题
-                              title: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(categoryList[index]['label'],
-                                    style: const TextStyle(
-                                        color: Color(0xFF323232))),
-                              ),
-                              // 是否有选中效果
-                              selected: true,
-                              // 点击事件
-                              onTap: () => {}),
-                          // 最后一行不要生成间隔线
-                          index < categoryList.length - 1
-                              ? const Divider(
-                                  indent: 70,
-                                  thickness: 1,
-                                  height: 10,
-                                  color: Color(0xFFeeeeee))
-                              : Container()
-                        ],
-                      ),
-                    );
-                  }, childCount: categoryList.length)),
-                  SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                    // nextLiIndex 是下一项的索引；如果当前是最后一项，那么下一项就定为
-                    var nextLiIndex = index < contactList.length - 1
-                        ? index + 1
-                        : contactList.length - 1;
-                    return Column(children: [
-                      // Offstage（中文意思：幕后） 控制组件显示或隐藏
-                      Offstage(
-                          offstage: contactList[index]['hasMark'] ==
-                              false, // offstage为true，则不显示组件
-                          child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                              alignment: Alignment.centerLeft,
-                              child: Text(contactList[index]['mark']))),
-                      Container(
+            child: Stack(alignment: Alignment.centerRight, // 设置字母表的位置：右侧垂直居中
+                children: [
+                  CustomScrollView(
+                    slivers: [
+                      const SliverToBoxAdapter(child: SearchBarBtn()),
+                      SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        return Container(
                           color: Colors.white,
                           child: Column(
                             children: [
                               ListTile(
                                   // 左边内容
-                                  leading: ClipRRect(
-                                      borderRadius: BorderRadius.circular(4.0),
-                                      child: Image.asset(
-                                          contactList[index]['img'],
-                                          width: 40,
-                                          height: 40)),
+                                  leading: Container(
+                                    width: 40,
+                                    height: 40,
+                                    child: Icon(categoryList[index]['icon'],
+                                        color: Colors.white),
+                                    decoration: BoxDecoration(
+                                        color: categoryList[index]['color'],
+                                        borderRadius:
+                                            BorderRadius.circular(4.0)),
+                                  ),
                                   // 中间第一行标题
                                   title: Container(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(contactList[index]['label'],
+                                    child: Text(categoryList[index]['label'],
                                         style: const TextStyle(
                                             color: Color(0xFF323232))),
                                   ),
@@ -239,8 +192,8 @@ class _ContactBookState extends State<ContactBook> {
                                   selected: true,
                                   // 点击事件
                                   onTap: () => {}),
-                              contactList[nextLiIndex]['hasMark'] == false &&
-                                      index < contactList.length - 1
+                              // 最后一行不要生成间隔线
+                              index < categoryList.length - 1
                                   ? const Divider(
                                       indent: 70,
                                       thickness: 1,
@@ -248,17 +201,69 @@ class _ContactBookState extends State<ContactBook> {
                                       color: Color(0xFFeeeeee))
                                   : Container()
                             ],
-                          ))
-                    ]);
-                  }, childCount: contactList.length)),
-                ],
-              ),
-              Positioned(
-                top: 50,
-                right: 5,
-                height: 450,
-                child: SingleChildScrollView(child: textBtns()),
-              )
-            ])));
+                          ),
+                        );
+                      }, childCount: categoryList.length)),
+                      SliverList(
+                          delegate:
+                              SliverChildBuilderDelegate((context, index) {
+                        // nextLiIndex 是下一项的索引；如果当前是最后一项，那么下一项就定为
+                        var nextLiIndex = index < contactList.length - 1
+                            ? index + 1
+                            : contactList.length - 1;
+                        return Column(children: [
+                          // Offstage（中文意思：幕后） 控制组件显示或隐藏
+                          Offstage(
+                              offstage: contactList[index]['hasMark'] ==
+                                  false, // offstage为true，则不显示组件
+                              child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15, vertical: 10),
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(contactList[index]['mark']))),
+                          Container(
+                              color: Colors.white,
+                              child: Column(
+                                children: [
+                                  ListTile(
+                                      // 左边内容
+                                      leading: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(4.0),
+                                          child: Image.asset(
+                                              contactList[index]['img'],
+                                              width: 40,
+                                              height: 40)),
+                                      // 中间第一行标题
+                                      title: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(contactList[index]['label'],
+                                            style: const TextStyle(
+                                                color: Color(0xFF323232))),
+                                      ),
+                                      // 是否有选中效果
+                                      selected: true,
+                                      // 点击事件
+                                      onTap: () => {}),
+                                  contactList[nextLiIndex]['hasMark'] ==
+                                              false &&
+                                          index < contactList.length - 1
+                                      ? const Divider(
+                                          indent: 70,
+                                          thickness: 1,
+                                          height: 10,
+                                          color: Color(0xFFeeeeee))
+                                      : Container()
+                                ],
+                              ))
+                        ]);
+                      }, childCount: contactList.length)),
+                    ],
+                  ),
+                  Positioned(
+                    right: 5, // 字母表与右边界的距离
+                    child: SingleChildScrollView(child: textBtns()), // 字母表
+                  )
+                ])));
   }
 }
